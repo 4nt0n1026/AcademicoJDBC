@@ -1,18 +1,44 @@
 package com.ads.bd2.academico.persistencia;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import com.ads.bd2.academico.modelo.Curso;
 
 public class DAOJDBCCurso extends DAOJDBC<Curso> {
 
 	@Override
 	public void create(Curso object) {
-		// TODO Auto-generated method stub
-
+		String sql = "INSERT INTO public.curso(	nome, codigo, coodernador, 'cargaHoraria')	VALUES (?, ?, ?, ?);";
+		if (object != null) {
+			init();
+			try {
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setString(1, object.getNome());
+				statement.setString(3, object.getCoordenador());
+				statement.setInt(4, object.getCargaHoraria());
+				statement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close();
+		}
 	}
 
 	@Override
 	public void delete(Curso object) {
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM curso	WHERE codigo=?;";
+		if (object != null){
+			init();
+			try{
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, object.getCodigo());
+				statement.executeUpdate();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			close();
+		}
 
 	}
 

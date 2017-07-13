@@ -6,7 +6,7 @@ public class Curso {
 	
 	private String nome;
 	
-	private String codigo;
+	private int codigo;
 	
 	private String coordenador;
 	
@@ -22,11 +22,11 @@ public class Curso {
 		this.nome = nome;
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
