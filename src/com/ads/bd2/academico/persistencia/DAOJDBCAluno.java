@@ -45,17 +45,16 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 
 	@Override
 	public void update(Aluno object) {
-		String sql = "UPDATE aluno SET matricula=?, nome=?, datamatricula=? WHERE matricula = ?;";
+		String sql = "UPDATE aluno SET nome=?, datamatricula=? WHERE matricula = ?;";
 		if(object != null){
 			init();
 			try{
 				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setInt(4, object.getMatricula());
-				statement.setInt(1, object.getMatricula());
-				statement.setString(2, object.getNome());
+				statement.setInt(3, object.getMatricula());				
+				statement.setString(1, object.getNome());
 				@SuppressWarnings("deprecation")
 				Date data = new Date(object.getDataMatricula().getYear(), object.getDataMatricula().getMonthValue(), object.getDataMatricula().getDayOfMonth());
-				statement.setDate(3, data);
+				statement.setDate(2, data);
 				statement.executeUpdate();
 			}catch (Exception e) {
 				e.printStackTrace();
