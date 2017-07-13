@@ -32,13 +32,18 @@ import com.ads.bd2.academico.persistencia.DAOJDBCCurso;
  *
  */
 public class Main {
+	
 
 	public static void main(String[] args) {
+		DAOJDBCAluno DAOAluno = new DAOJDBCAluno();
+		DAOJDBCCurso DAOCurso = new DAOJDBCCurso();
 		//criando 6 alunos (implemente o método abaixo)
 		//criarAlunos(6);
 		
+		
 		//criando 2 cursos (implemente o método abaixo)
 		//criarCursos(2);
+		
 		
 		//Matricule 3 alunos num curso e outros 3 num segundo curso.
 		//CRIANDO ALUNOS
@@ -65,7 +70,7 @@ public class Main {
 		turma1.add(aluno1);turma1.add(aluno2);turma1.add(aluno3);
 		
 		ArrayList<Aluno>turma2 = new ArrayList<Aluno>();
-		turma1.add(aluno4);turma1.add(aluno5);turma1.add(aluno6);
+		turma2.add(aluno4);turma2.add(aluno5);turma2.add(aluno6);
 		
 		//CRIANDO CURSOS
 		Curso curso1 = new Curso();
@@ -74,16 +79,31 @@ public class Main {
 		Curso curso2 = new Curso();
 		curso2.setCodigo(2);
 		
+		
 		//MATRICULANDO
 		matricularAlunoNoCurso(turma1, curso1);
 		matricularAlunoNoCurso(turma2, curso2);
 		
 		
 		//Matricula 1 mesmo aluno nos 2 cursos. 
+		//ArrayList<Aluno> turma3 = new ArrayList<Aluno>();
+		//turma3.add(aluno1);
+		//matricularAlunoNoCurso(turma3, curso1);
+		//matricularAlunoNoCurso(turma3, curso2);
+		
 		
 		//Você deverá recuperar o curso passado como parâmetro usando o find() da classe {@link DAOJDBCCurso} 
+		Curso curso3 = DAOCurso.find(curso1);
+				
 		//Você deverá recuperar os alunos passados como parâmetro usando o find() da classe {@link DAOJDBCAluno}
+		Aluno aluno7 = DAOAluno.find(aluno1);
+		
+		
+		
 		//Você deverá adicionar os alunos nos respectivos objetos dos cursos.
+		
+		
+		
 		//Para cada matriculada de alunos num curso, chame o método comentado abaixo (implemente-o primeiro)...
 		//matricularAlunoNoCurso(alunos, curso); 
 		//matricularAlunoNoCurso(alunos, curso); 
@@ -151,7 +171,7 @@ public class Main {
 		for(Aluno a: alunos) {
 			daoCurso.matricularAluno(a, curso);			
 		}
-		
+		daoCurso.close();                            
 	}
 	
 	/**

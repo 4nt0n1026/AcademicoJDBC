@@ -91,8 +91,9 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			close();
+			
 		}
+		close();
 		return null;
 	}
 
@@ -102,28 +103,32 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		//ResultSet como atributos desse curso.
 
 		//se cascade for true, traga os alunos e os adicione ao curso, se tiverem alunos neste curso no banco.
+		Curso curso = find(object);
+		
 		
 		return null;
 	}
 	
 	public void matricularAluno(Aluno aluno, Curso curso){
+		System.out.println(curso.getCodigo());
 		String sql = "INSERT INTO curso_aluno(matricula_aluno, codigo_curso)	VALUES (?, ?);";
 		DAOJDBCAluno a = new DAOJDBCAluno();
 		if (aluno != null && curso != null){
+			
 			if(find(curso) != null && a.find(aluno) != null){				
-				try {
+				try {		
 					init();
 					PreparedStatement statement = conn.prepareStatement(sql);
-					statement.setInt(1, aluno.getMatricula());
+					statement.setInt(1, aluno.getMatricula());					
 					statement.setInt(2, curso.getCodigo());
 					statement.executeUpdate();
-					System.out.println("Aluno cadastrado no curso com sucesso!");
-					close();
+					System.out.println("Aluno cadastrado no curso com sucesso!");								
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}				
 			}			
-		}		
+		}
+		
 	}
 
 }
