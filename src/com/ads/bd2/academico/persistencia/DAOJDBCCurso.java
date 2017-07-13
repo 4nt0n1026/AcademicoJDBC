@@ -1,9 +1,10 @@
 package com.ads.bd2.academico.persistencia;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.ads.bd2.academico.modelo.Aluno;
 import com.ads.bd2.academico.modelo.Curso;
@@ -101,9 +102,30 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		//colete o atributo que identifica o curso e o recupere do banco.
 		//devolva um objeto curso com essas informações, mapeando as colunas do
 		//ResultSet como atributos desse curso.
-
-		//se cascade for true, traga os alunos e os adicione ao curso, se tiverem alunos neste curso no banco.
+		DAOJDBCAluno daoAluno = new DAOJDBCAluno();
 		Curso curso = find(object);
+		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+		//se cascade for true, traga os alunos e os adicione ao curso, se tiverem alunos neste curso no banco.
+		if (cascade == true){
+			String sql = "SELECT matricula_aluno FROM public.curso_aluno WHERE codigo_curso=?;";
+			try{
+				init();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, curso.getCodigo());
+				ResultSet resultado = statement.executeQuery();
+				while(resultado.next()){
+					Aluno aluno = new Aluno();
+					aluno.setMatricula(resultado.getInt("matricula_aluno"));
+					Aluno alunoCerto = daoAluno.find(aluno);
+					alunos.add(alunoCerto);
+				}
+				curso.setAlunos(alunos);
+				return curso;
+			
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		return null;
