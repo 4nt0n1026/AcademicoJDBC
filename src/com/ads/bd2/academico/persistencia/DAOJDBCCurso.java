@@ -1,8 +1,11 @@
 package com.ads.bd2.academico.persistencia;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
+import com.ads.bd2.academico.modelo.Aluno;
 import com.ads.bd2.academico.modelo.Curso;
 
 public class DAOJDBCCurso extends DAOJDBC<Curso> {
@@ -18,6 +21,8 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 				statement.setString(2, object.getCoordenador());
 				statement.setInt(3, object.getCargaHoraria());
 				statement.executeUpdate();
+				System.out.println("Curso cadastrado com sucesso!");
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -34,6 +39,7 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setInt(1, object.getCodigo());
 				statement.executeUpdate();
+				System.out.println("Curso removido com sucesso!");
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -64,7 +70,29 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		//colete o atributo que identifica o curso e o recupere do banco.
 		//devolva um objeto curso com essas informações, mapeando as colunas do
 		//ResultSet como atributos desse curso.
-
+		String sql = "SELECT nome, codigo, coodernador, cargahoraria FROM public.curso WHERE codigo = ?;";
+		if(object != null){
+			init();
+			try{
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, object.getCodigo());
+				ResultSet resultado = statement.executeQuery();
+				if(resultado.next()){
+					Curso curso = new Curso();
+					curso.setNome(resultado.getString(1));
+					curso.setCodigo(resultado.getInt(2));
+					curso.setCoordenador(resultado.getString(3));
+					curso.setCargaHoraria(resultado.getInt(4));
+					return curso;
+				}
+				else{
+					throw new Exception("Curso não encontrado!");
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			close();
+		}
 		return null;
 	}
 
@@ -74,7 +102,28 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		//ResultSet como atributos desse curso.
 
 		//se cascade for true, traga os alunos e os adicione ao curso, se tiverem alunos neste curso no banco.
+		
 		return null;
+	}
+	
+	public void matricularAluno(Aluno aluno, Curso curso){
+		String sql = "INSERT INTO curso_aluno(matricula_aluno, codigo_curso)	VALUES (?, ?);";
+		DAOJDBCAluno a = new DAOJDBCAluno();
+		if (aluno != null && curso != null){
+			if(find(curso) != null && a.find(aluno) != null){
+				init();
+				try {
+					PreparedStatement statement = conn.prepareStatement(sql);
+					statement.setInt(1, aluno.getMatricula());
+					statement.setInt(2, curso.getCodigo());
+					statement.executeUpdate();
+					System.out.println("Aluno cadastrado no curso com sucesso!");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				close();
+			}
+		}
 	}
 
 }

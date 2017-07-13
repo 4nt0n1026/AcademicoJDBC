@@ -19,6 +19,7 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 				statement.setString(1, object.getNome());
 				statement.setObject(2, object.getDataMatricula());
 				statement.executeUpdate();
+				System.out.println("Aluno cadastrado com sucesso!");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -35,6 +36,8 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setInt(1, object.getMatricula());
 				statement.executeUpdate();
+				System.out.println("Aluno removido com sucesso!");
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -55,6 +58,8 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 				Date data = new Date(object.getDataMatricula().getYear(), object.getDataMatricula().getMonthValue(), object.getDataMatricula().getDayOfMonth());
 				statement.setDate(2, data);
 				statement.executeUpdate();
+				System.out.println("Aluno atualizado com sucesso!");
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
