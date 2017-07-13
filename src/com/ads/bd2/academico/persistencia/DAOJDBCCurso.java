@@ -9,7 +9,7 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 
 	@Override
 	public void create(Curso object) {
-		String sql = "INSERT INTO public.curso(	nome, coodernador, 'cargaHoraria')	VALUES (?, ?, ?);";
+		String sql = "INSERT INTO public.curso(	nome, coodernador, cargahoraria)	VALUES (?, ?, ?);";
 		if (object != null) {
 			init();
 			try {
