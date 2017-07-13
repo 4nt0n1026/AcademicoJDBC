@@ -9,14 +9,14 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 
 	@Override
 	public void create(Curso object) {
-		String sql = "INSERT INTO public.curso(	nome, codigo, coodernador, 'cargaHoraria')	VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO public.curso(	nome, coodernador, 'cargaHoraria')	VALUES (?, ?, ?);";
 		if (object != null) {
 			init();
 			try {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setString(1, object.getNome());
-				statement.setString(3, object.getCoordenador());
-				statement.setInt(4, object.getCargaHoraria());
+				statement.setString(2, object.getCoordenador());
+				statement.setInt(3, object.getCargaHoraria());
 				statement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
