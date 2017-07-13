@@ -73,7 +73,7 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		String sql = "SELECT nome, codigo, coodernador, cargahoraria FROM public.curso WHERE codigo = ?;";
 		if(object != null){
 			init();
-			try{
+			try{				
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setInt(1, object.getCodigo());
 				ResultSet resultado = statement.executeQuery();
@@ -110,20 +110,20 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		String sql = "INSERT INTO curso_aluno(matricula_aluno, codigo_curso)	VALUES (?, ?);";
 		DAOJDBCAluno a = new DAOJDBCAluno();
 		if (aluno != null && curso != null){
-			if(find(curso) != null && a.find(aluno) != null){
-				init();
+			if(find(curso) != null && a.find(aluno) != null){				
 				try {
+					init();
 					PreparedStatement statement = conn.prepareStatement(sql);
 					statement.setInt(1, aluno.getMatricula());
 					statement.setInt(2, curso.getCodigo());
 					statement.executeUpdate();
 					System.out.println("Aluno cadastrado no curso com sucesso!");
+					close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}
-				close();
-			}
-		}
+				}				
+			}			
+		}		
 	}
 
 }

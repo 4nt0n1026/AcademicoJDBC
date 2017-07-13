@@ -85,7 +85,8 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 					Aluno aluno = new Aluno();
 					aluno.setMatricula(resultado.getInt(1));
 					aluno.setNome(resultado.getString(2));
-					aluno.setDataMatricula((LocalDate) resultado.getObject(3));
+					LocalDate born = LocalDate.parse(String.valueOf(resultado.getObject(3)));
+					aluno.setDataMatricula(born);
 					return aluno;
 				}
 				else{

@@ -1,5 +1,6 @@
 package com.ads.bd2.academico.app;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.ads.bd2.academico.modelo.Aluno;
 import com.ads.bd2.academico.modelo.Curso;
@@ -34,13 +35,52 @@ public class Main {
 
 	public static void main(String[] args) {
 		//criando 6 alunos (implemente o método abaixo)
-		criarAlunos(6);
+		//criarAlunos(6);
 		
 		//criando 2 cursos (implemente o método abaixo)
-		criarCursos(2);
+		//criarCursos(2);
 		
 		//Matricule 3 alunos num curso e outros 3 num segundo curso.
+		//CRIANDO ALUNOS
+		Aluno aluno1 = new Aluno();
+		aluno1.setMatricula(1);
+		
+		Aluno aluno2 = new Aluno();
+		aluno2.setMatricula(2);
+		
+		Aluno aluno3 = new Aluno();
+		aluno3.setMatricula(3);				
+		
+		Aluno aluno4 = new Aluno();
+		aluno4.setMatricula(4);
+		
+		Aluno aluno5 = new Aluno();
+		aluno5.setMatricula(5);
+		
+		Aluno aluno6 = new Aluno();
+		aluno6.setMatricula(6);
+		
+		//ENTURMANDO ALUNOS
+		ArrayList<Aluno>turma1 = new ArrayList<Aluno>();
+		turma1.add(aluno1);turma1.add(aluno2);turma1.add(aluno3);
+		
+		ArrayList<Aluno>turma2 = new ArrayList<Aluno>();
+		turma1.add(aluno4);turma1.add(aluno5);turma1.add(aluno6);
+		
+		//CRIANDO CURSOS
+		Curso curso1 = new Curso();
+		curso1.setCodigo(1);
+		
+		Curso curso2 = new Curso();
+		curso2.setCodigo(2);
+		
+		//MATRICULANDO
+		matricularAlunoNoCurso(turma1, curso1);
+		matricularAlunoNoCurso(turma2, curso2);
+		
+		
 		//Matricula 1 mesmo aluno nos 2 cursos. 
+		
 		//Você deverá recuperar o curso passado como parâmetro usando o find() da classe {@link DAOJDBCCurso} 
 		//Você deverá recuperar os alunos passados como parâmetro usando o find() da classe {@link DAOJDBCAluno}
 		//Você deverá adicionar os alunos nos respectivos objetos dos cursos.
@@ -106,7 +146,11 @@ public class Main {
 	 * COMO VERIFICAR?
 	 * Veja se a tabela para relação N:N entre curso e aluno contém os valores esperados. 
 	 */	
-	public static void matricularAlunoNoCurso(Aluno[] alunos, Curso curso) {
+	public static void matricularAlunoNoCurso(ArrayList<Aluno> alunos, Curso curso) {
+		DAOJDBCCurso daoCurso = new DAOJDBCCurso();
+		for(Aluno a: alunos) {
+			daoCurso.matricularAluno(a, curso);			
+		}
 		
 	}
 	
