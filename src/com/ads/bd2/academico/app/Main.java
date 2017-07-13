@@ -66,13 +66,15 @@ public class Main {
 	 * Acesse o seu banco de dados e verifique se a tabela contém os objetos persistidos.	 * 
 	 */
 	public static void criarAlunos(int quantidade) {
-		Aluno aluno = new Aluno();
-		aluno.setDataMatricula(LocalDate.now());
-		aluno.setMatricula(1);
-		aluno.setNome("Giuseppe");
-		
-		DAOJDBC<Aluno> daoAluno = new DAOJDBCAluno();
-		daoAluno.create(aluno);
+		for (int i = 0; i < quantidade-1; i++) {
+			Aluno aluno = new Aluno();
+			//aluno.setDataMatricula(LocalDate.now());
+			aluno.setMatricula(1);
+			aluno.setNome("Giuseppe");
+			
+			DAOJDBC<Aluno> daoAluno = new DAOJDBCAluno();
+			daoAluno.create(aluno);
+		}
 	}
 	
 	/**
