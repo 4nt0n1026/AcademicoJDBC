@@ -95,7 +95,6 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 			close();
 		}
 		return null;
-		
 	}
 
 }
