@@ -16,7 +16,7 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 			init();
 			try {
 				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setInt(1, 0);
+				statement.setInt(1, 1);
 				statement.setString(2, object.getNome());
 				statement.setObject(3, object.getDataMatricula());
 				statement.executeUpdate();
