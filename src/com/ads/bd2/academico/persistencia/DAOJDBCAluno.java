@@ -11,13 +11,14 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 
 	@Override
 	public void create(Aluno object) {
-		String sql = "INSERT INTO aluno(nome, datamatricula) VALUES (?, ?)";
+		String sql = "INSERT INTO aluno(matricula, nome, datamatricula) VALUES (?, ?, ?)";
 		if (object != null) {
 			init();
 			try {
 				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setString(1, object.getNome());
-				statement.setObject(2, object.getDataMatricula());
+				statement.setInt(1, 0);
+				statement.setString(2, object.getNome());
+				statement.setObject(3, object.getDataMatricula());
 				statement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
