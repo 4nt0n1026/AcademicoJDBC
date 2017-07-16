@@ -36,9 +36,11 @@ public class Main {
 	
 
 	public static void main(String[] args) {
+
 		
 		DAOJDBCAluno DAOAluno = new DAOJDBCAluno();
 		DAOJDBCCurso DAOCurso = new DAOJDBCCurso();
+		
 		DAOAluno.zerarBanco();
 		//criando 6 alunos (implemente o método abaixo)
 		criarAlunos(6);
