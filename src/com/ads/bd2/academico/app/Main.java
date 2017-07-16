@@ -190,7 +190,8 @@ public class Main {
 	 * Veja se a tabela para relação N:N entre curso e aluno contém os valores esperados. 
 	 */	
 	public static void desmatricularAlunoNoCurso(Aluno aluno, Curso curso) {
-		
+		DAOJDBCCurso daoCurso = new DAOJDBCCurso();
+		daoCurso.desmatricularAluno(aluno, curso);
 	}
 	
 

@@ -152,5 +152,40 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		}
 		
 	}
-
+	
+	public void desmatricularAluno(Aluno aluno, Curso curso) {
+		String sql = "DELETE FROM public.curso_aluno WHERE matricula_aluno = ? and codigo_curso = ?;";
+		DAOJDBCAluno a = new DAOJDBCAluno();
+		if (aluno != null && curso != null){
+			if(find(curso) != null && a.find(aluno) != null){
+				try {		
+					init();
+					PreparedStatement statement = conn.prepareStatement(sql);
+					statement.setInt(1, aluno.getMatricula());					
+					statement.setInt(2, curso.getCodigo());
+					statement.executeUpdate();
+					System.out.println("Aluno desmatriculado do curso com sucesso!");
+					close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}					
+			}
+		}		
+	}
+	
+	public void delete(Curso curso, boolean cascade) {
+		
+		if(cascade==true && curso.getCodigo()>0) {			
+			String sql = "DELETE FROM public.curso_aluno WHERE codigo_curso = ?;";
+			try {		
+				init();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, curso.getCodigo());					
+				statement.executeUpdate();						
+				delete(curso);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}				
+		}	
+	}
 }

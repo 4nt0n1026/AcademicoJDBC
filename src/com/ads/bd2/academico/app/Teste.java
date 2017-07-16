@@ -12,11 +12,11 @@ import com.ads.bd2.academico.persistencia.DAOJDBCCurso;
 public class Teste {
 
 	public static void main(String[] args) {
-		DAOJDBCCurso dao = new DAOJDBCCurso();
-		Curso curso = new Curso();
-		curso.setCodigo(1);
-		Curso curso2 = dao.find(curso, true);
-		System.out.println(curso2.getAlunos().size());
+		Aluno aluno = new Aluno();
+		aluno.setMatricula(2);	
+		DAOJDBCAluno dao = new DAOJDBCAluno();
+		dao.delete(aluno, true);
+				
 	}
 
 }

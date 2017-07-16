@@ -44,6 +44,22 @@ public class DAOJDBCAluno extends DAOJDBC<Aluno> {
 			close();
 		}
 	}
+	
+	public void delete(Aluno object, boolean cascade) {
+		String sql = "DELETE FROM public.curso_aluno WHERE matricula_aluno = ?;";
+		if (object != null && cascade==true){
+			init();
+			try{
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, object.getMatricula());
+				statement.executeUpdate();
+				delete(object);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}									
+		}
+		
+	}
 
 	@Override
 	public void update(Aluno object) {
