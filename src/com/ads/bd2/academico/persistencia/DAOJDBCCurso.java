@@ -72,7 +72,6 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 	public void update(Curso object, boolean cascade) {
 		//Implementaremos um update em cascata aqui (o curso + os alunos).
 		//chame o update do curso para atualizar o o curso em si.
-		
 		//se cascade true, caso não haja nenhum aluno no curso passado, remover vínculos dos alunos no banco também.
 		//Caso haja algum aluno, remova os vínculos dos alunos que o curso já tinha no banco primeiro, para limpar. 
 		//Em seguida, vincule os alunos contidos no curso passado como parâmetro neste método.
