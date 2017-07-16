@@ -38,11 +38,11 @@ public class Main {
 		DAOJDBCAluno DAOAluno = new DAOJDBCAluno();
 		DAOJDBCCurso DAOCurso = new DAOJDBCCurso();
 		//criando 6 alunos (implemente o método abaixo)
-		//criarAlunos(6);
+		criarAlunos(6);
 		
 		
 		//criando 2 cursos (implemente o método abaixo)
-		//criarCursos(2);
+		criarCursos(2);
 		
 		
 		//Matricule 3 alunos num curso e outros 3 num segundo curso.
@@ -86,22 +86,25 @@ public class Main {
 		
 		
 		//Matricula 1 mesmo aluno nos 2 cursos. 
-		//ArrayList<Aluno> turma3 = new ArrayList<Aluno>();
-		//turma3.add(aluno1);
-		//matricularAlunoNoCurso(turma3, curso1);
-		//matricularAlunoNoCurso(turma3, curso2);
+		ArrayList<Aluno> turma3 = new ArrayList<Aluno>();
+		turma3.add(aluno1);
+		matricularAlunoNoCurso(turma3, curso1);
+		matricularAlunoNoCurso(turma3, curso2);
 		
 		
 		//Você deverá recuperar o curso passado como parâmetro usando o find() da classe {@link DAOJDBCCurso} 
-		Curso curso3 = DAOCurso.find(curso1);
+		curso1 = DAOCurso.find(curso1);
+		System.out.println(curso1.getNome());
 				
 		//Você deverá recuperar os alunos passados como parâmetro usando o find() da classe {@link DAOJDBCAluno}
 		Aluno aluno7 = DAOAluno.find(aluno1);
-		
-		
+		System.out.println(aluno7.getNome());		
 		
 		//Você deverá adicionar os alunos nos respectivos objetos dos cursos.
-		
+		curso1 = DAOCurso.find(curso1,true);
+		curso2 = DAOCurso.find(curso2,true);
+		System.out.println(curso1.getAlunos().size());
+		System.out.println(curso2.getAlunos().size());
 		
 		
 		//Para cada matriculada de alunos num curso, chame o método comentado abaixo (implemente-o primeiro)...

@@ -146,7 +146,7 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 					statement.executeUpdate();
 					System.out.println("Aluno cadastrado no curso com sucesso!");								
 				} catch (SQLException e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}				
 			}			
 		}
