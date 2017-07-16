@@ -1,6 +1,5 @@
 package com.ads.bd2.academico.persistencia;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,10 +50,25 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 
 	@Override
 	public void update(Curso object) {
-
-
+		String sql = "UPDATE public.curso SET nome=?, coodernador=?, cargahoraria=?	WHERE codigo=?;";
+		if(object != null){
+			init();
+			try{
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(4, object.getCodigo());				
+				statement.setString(1, object.getNome());
+				statement.setString(2, object.getCoordenador());
+				statement.setInt(3, object.getCargaHoraria());
+				statement.executeUpdate();
+				System.out.println("Curso atualizado com sucesso!");
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			close();
+		}
 	}
 
+	//Imposivel fazer sem receber outros parametros
 	public void update(Curso object, boolean cascade) {
 		//Implementaremos um update em cascata aqui (o curso + os alunos).
 		//chame o update do curso para atualizar o o curso em si.
@@ -64,6 +78,7 @@ public class DAOJDBCCurso extends DAOJDBC<Curso> {
 		//Em seguida, vincule os alunos contidos no curso passado como parâmetro neste método.
 		//Caso alguns dos alunos presentes no curso passado como parâmetro já exista no banco, considerando que eles
 		//podem ter algum atributo atualizado, atualize esses alunos também (use o dao do aluno nessa situação para evitar retrabalho)
+		
 	}
 
 	@Override

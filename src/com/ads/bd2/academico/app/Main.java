@@ -1,5 +1,4 @@
 package com.ads.bd2.academico.app;
-import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
