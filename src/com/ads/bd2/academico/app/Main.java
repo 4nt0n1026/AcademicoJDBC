@@ -100,8 +100,8 @@ public class Main {
 		System.out.println(curso1.getNome());
 				
 		//Você deverá recuperar os alunos passados como parâmetro usando o find() da classe {@link DAOJDBCAluno}
-		Aluno aluno7 = DAOAluno.find(aluno1);
-		System.out.println(aluno7.getNome());		
+		aluno1 = DAOAluno.find(aluno1);
+		System.out.println(aluno1.getNome());		
 		
 		//Você deverá adicionar os alunos nos respectivos objetos dos cursos.
 		curso1 = DAOCurso.find(curso1,true);
@@ -111,16 +111,37 @@ public class Main {
 		
 		
 		//Para cada matriculada de alunos num curso, chame o método comentado abaixo (implemente-o primeiro)...
-		//matricularAlunoNoCurso(alunos, curso); 
-		//matricularAlunoNoCurso(alunos, curso); 
+		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+		alunos.add(aluno1);alunos.add(aluno2);alunos.add(aluno3);
+		alunos.add(aluno4);alunos.add(aluno5);alunos.add(aluno6);
+		
+		criarCursos(2);
+		
+		Curso curso3 = new Curso();
+		curso3.setCodigo(3);		
+		Curso curso4 = new Curso();
+		curso4.setCodigo(4);
+		
+		matricularAlunoNoCurso(alunos, curso3); 
+		matricularAlunoNoCurso(alunos, curso4); 
 		
 		//Desmatricule 1 aluno de um curso e 1 do segundo curso.
+		desmatricularAlunoNoCurso(aluno1, curso1);
+		desmatricularAlunoNoCurso(aluno3, curso2);
+		
 		//Você deverá recuperar o curso passado como parâmetro usando o find() da classe {@link DAOJDBCCurso} 
+		curso3 = DAOCurso.find(curso3);
+		
 		//Você deverá recuperar os alunos passados como parâmetro usando o find() da classe {@link DAOJDBCAluno}
+		aluno1 = DAOAluno.find(aluno1);aluno2 = DAOAluno.find(aluno2);aluno3 = DAOAluno.find(aluno3);
+		aluno4 = DAOAluno.find(aluno4);aluno5 = DAOAluno.find(aluno5);aluno6 = DAOAluno.find(aluno6);
+		
 		//Você deverá retirar os alunos nos respectivos objetos dos cursos.
+		alunos = (ArrayList<Aluno>) curso3.getAlunos();
+		
 		//Para cada desmatriculada de um aluno num curso, chame o método comentado abaixo (implemente-o primeiro)...
-		//desmatricularAlunoNoCurso(aluno, curso);
-		//desmatricularAlunoNoCurso(aluno, curso);
+		desmatricularAlunoNoCurso(aluno1, curso3);
+		desmatricularAlunoNoCurso(aluno2, curso3);
 	}
 	
 	/**
