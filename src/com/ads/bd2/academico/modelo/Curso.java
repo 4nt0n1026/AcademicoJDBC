@@ -4,14 +4,10 @@ import java.util.List;
 
 public class Curso {
 	
-	private String nome;
-	
-	private int codigo;
-	
-	private String coordenador;
-	
-	private int cargaHoraria;
-	
+	private String nome;	
+	private int codigo;	
+	private String coordenador;	
+	private int cargaHoraria;	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	public String getNome() {

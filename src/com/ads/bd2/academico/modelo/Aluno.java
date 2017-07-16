@@ -3,10 +3,8 @@ import java.time.LocalDate;
 
 public class Aluno {
 	
-	private String nome;
-	
-	private int matricula;
-	
+	private String nome;	
+	private int matricula;	
 	private LocalDate dataMatricula;
 
 	public String getNome() {
