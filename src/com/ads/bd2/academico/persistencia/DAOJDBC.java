@@ -11,7 +11,7 @@ public abstract class DAOJDBC<O> {
 		if (conn == null) {
 			try {
 				Class.forName("org.postgresql.Driver");
-				conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.108:5432/bd2_academico", "postgres", "1234"); 
+				conn = DriverManager.getConnection("jdbc:postgresql://192.168.0.112:5432/bd2_academico", "postgres", "1234"); 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
