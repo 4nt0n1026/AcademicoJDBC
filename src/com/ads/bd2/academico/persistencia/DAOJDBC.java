@@ -1,6 +1,7 @@
 package com.ads.bd2.academico.persistencia;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public abstract class DAOJDBC<O> {
@@ -28,6 +29,24 @@ public abstract class DAOJDBC<O> {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void zerarBanco(){
+		try{
+			String sql = "DELETE FROM public.curso_aluno;"
+					+ "DELETE FROM public.aluno;"
+					+ "DELETE FROM public.curso;"
+					+ "ALTER SEQUENCE aluno_matricula_seq RESTART WITH 1;"
+					+ "UPDATE aluno SET matricula=nextval('aluno_matricula_seq');"
+					+ "ALTER SEQUENCE curso_codigo_seq RESTART WITH 1;"
+					+ "UPDATE curso SET codigo=nextval('curso_codigo_seq');";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.executeUpdate();
+			System.out.println("Banco zerado com sucesso!");
+		}catch (Exception e) {
+			System.out.println("Banco zerado com sucesso!");
+		}
+
 	}
 	
 	public abstract void create(O object);
