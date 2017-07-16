@@ -27,8 +27,8 @@ import com.ads.bd2.academico.persistencia.DAOJDBCCurso;
  * Faça em dupla e traga sua implementação até a próxima aula de BD2!
  * Adicione os autores para identificar o código da dupla, como abaixo
  *  
- * @author Giuseppe 1
- * @author Giuseppe 2
+ * @author Jadson 1
+ * @author Vitor 2
  *
  */
 public class Main {
